@@ -45,7 +45,6 @@ int main()
 			}	
 		}
 
-
 		int sz = q.size();
 		while (sz--) {
 			int x = q.front().first;
