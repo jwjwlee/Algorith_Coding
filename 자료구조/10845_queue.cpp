@@ -1,45 +1,89 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-class Queue
+struct queue
 {
-private:
-    int data;
-    int front;
-    int back;
-public:
-    void push();
-    void pop();
-    void size();
-    void empty();
-    void front_func();
-    void back_func();
+	int data[10000];
+	int head = 0, tail = 0;
+
+	void push(int val) {
+		data[tail++] = val;
+	}
+
+	int size() {
+		return tail - head;
+	}
+
+	bool empty() {
+		if (tail == head) return true;
+		else return false;
+	}
+
+	int pop() {
+		if (empty()) return -1;
+		else return data[head++];
+	}
+
+	int front() {
+		if (empty()) return -1;
+		return data[head];
+	}
+
+	int back() {
+		if (empty()) return -1;
+		return data[tail - 1];
+	}
 };
 
-void Queue::push()
-{
+int main() {
+	freopen("input.txt", "r", stdin);
 
+	int n;
+	cin >> n;
 
+	queue q;
 
+	while (n--) {
+		string cmd;
+		cin >> cmd;
+		if (cmd == "push") {
+			int num;
+			cin >> num;
+			q.push(num);
+		}
+		else if (cmd == "pop") {
+			if (q.empty()) {
+				cout << -1 << '\n';
+			}
+			else {
+				cout << q.front() << '\n';
+				q.pop();
+			}
+		}
+		else if (cmd == "size") {
+			cout << q.size() << '\n';
+		}
+		else if (cmd == "empty") {
+			cout << q.empty() << '\n';
+		}
+		else if (cmd == "front") {
+			if (q.empty()) {
+				cout << -1 << '\n';
+			}
+			else {
+				cout << q.front() << '\n';
+			}
+		}
+		else if (cmd == "back") {
+			if (q.empty()) {
+				cout << -1 << '\n';
+			}
+			else {
+				cout << q.back() << '\n';
+			}
+		}
+	}
 
-/*
-int main()
-{
-    int i, case_num;
-    char c[6];
-
-    scanf("%d", &case_num);
-    for (i = 0; i < case_num; i++) {
-        scanf("%s", c);
-        if (!strcmp(c, "push")) push();
-        else if (!strcmp(c, "pop")) pop();
-        else if (!strcmp(c, "size")) size();
-        else if (!strcmp(c, "empty")) empty();
-        else if (!strcmp(c, "front")) front();
-        else if (!strcmp(c, "back")) back();
-        else printf("input error\n");
-    }
-    return 0;
+	return 0;
 }
-
-*/
